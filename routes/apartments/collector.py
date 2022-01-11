@@ -1,5 +1,5 @@
 import requests
-from apartments_com_parser import last_page_getter
+from .apartments_com_parser import last_page_getter
 
 
 def get_all_data_by_area(location):
