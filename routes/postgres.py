@@ -1,5 +1,6 @@
 import os
 import psycopg2
+import psycopg2.extras
 from psycopg2 import Error
 
 def connect_postgres():
@@ -13,7 +14,7 @@ def connect_postgres():
                                     database="postgres")
 
       # Create a cursor to perform database operations
-      cursor = connection.cursor()
+      cursor = connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
       # Print PostgreSQL details
       print("Connected to postgres...")
       return connection, cursor
