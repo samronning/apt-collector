@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_cors import CORS
 from flask_restful import Api
 import pandas as pd
 
@@ -7,6 +8,7 @@ from routes.apartments.apartments import AptList
 from routes.cities import CitySearch
 
 app = Flask(__name__)
+CORS(app)
 api = Api(app)
 
 api.add_resource(AptList, '/apartments/list')
