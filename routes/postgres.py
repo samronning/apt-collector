@@ -3,7 +3,7 @@ import psycopg2
 from psycopg2 import Error
 
 def connect_postgres():
-  password = os.environ.get("postgrespass")
+  password = os.environ.get("pgpass")
   try:
       # Connect to an existing database
       connection = psycopg2.connect(user="postgres",
@@ -21,8 +21,8 @@ def connect_postgres():
   except (Exception, Error) as error:
       print("Error while connecting to PostgreSQL", error)
 
-def close_postgres(connection):
-    if (connection):
+def close_postgres(connection, cursor):
+    if (connection, cursor):
         cursor.close()
         connection.close()
         print("PostgreSQL connection is closed")
