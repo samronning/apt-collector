@@ -1,4 +1,4 @@
-from .postgres import connect_postgres, close_postgres
+from postgres import connect_postgres, close_postgres
 from flask import request
 from flask_restful import Resource
 
