@@ -15,6 +15,7 @@ def listing_parser(raw):
         address = p_info.find(['div', 'p'], class_=['property-address'])
         beds = p_info.find(['p', 'span', 'div'], class_=[
                            'property-beds', 'bed-range'])
+        img = p_info.find(['div'], class_='carouselInner')
         if (beds):
             beds = beds.text
         if (address):
@@ -22,9 +23,17 @@ def listing_parser(raw):
         if (pricing):
             pricing = pricing.text
         if (title):
-            title = title['title']
+            title = title.text
+        if (img):
+            img_str = img.div['style'] if img.div.has_attr('style') else img.div['data-image'] if img.div.has_attr('data-image') else None
+            m = re.search(r"(http.*)\"*", img_str)
+            if m:
+                img = m.group(1)
+            else:
+                img = None
+
         properties.append(
-            {"title": title, "pricing": pricing, 'address': address, 'beds': beds})
+            {"title": title, "pricing": pricing, 'address': address, 'beds': beds, 'img': img})
 
     return properties
 
