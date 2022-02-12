@@ -26,7 +26,7 @@ def listing_parser(raw):
             title = title.text
         if (img):
             img_str = img.div['style'] if img.div.has_attr('style') else img.div['data-image'] if img.div.has_attr('data-image') else None
-            m = re.search(r"(http.*)\"*", img_str)
+            m = re.search(r"(http[^\"]*)", img_str)
             if m:
                 img = m.group(1)
             else:
