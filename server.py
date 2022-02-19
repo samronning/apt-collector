@@ -17,4 +17,4 @@ api = Api(app)
 
 api.add_resource(AptList, '/apartments/list', resource_class_kwargs={"r": r})
 api.add_resource(CitySearch, '/cities')
-app.run()
+app.run(host="0.0.0.0")
