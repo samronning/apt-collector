@@ -19,21 +19,22 @@ def listing_parser(raw):
         if (beds):
             beds = beds.text
             beds = re.sub("Studio", "0", beds)
-            beds = re.split(" - ", beds)
+            beds = re.sub(r"[^\d^-]", "", beds)
+            beds = re.split("-", beds)
             if len(beds) > 1:
                 bed_min = beds[0]
                 bed_max = beds[1]
             else:
                 bed_min = beds[0]
                 bed_max = bed_min
-            bed_min = int(re.sub(r"[^\d]", "", bed_min))
-            bed_max = int(re.sub(r"[^\d]", "", bed_max))
+            bed_min = int(bed_min)
+            bed_max = int(bed_max)
         if (address):
             address = address['title']
         if (pricing):
             pricing = pricing.text
-            pricing = re.sub(r"[$,]", "", pricing)
-            pricing = re.split(" - ", pricing)
+            pricing = re.sub(r"[^\d^-]", "", pricing)
+            pricing = re.split("-", pricing)
             if len(pricing) > 1:
                 price_min = pricing[0]
                 price_max = pricing[1]
