@@ -18,10 +18,30 @@ def listing_parser(raw):
         img = p_info.find(['div'], class_='carouselInner')
         if (beds):
             beds = beds.text
+            beds = re.sub("Studio", "0", beds)
+            beds = re.split(" - ", beds)
+            if len(beds) > 1:
+                bed_min = beds[0]
+                bed_max = beds[1]
+            else:
+                bed_min = beds[0]
+                bed_max = bed_min
+            bed_min = int(re.sub(r"[^\d]", "", bed_min))
+            bed_max = int(re.sub(r"[^\d]", "", bed_max))
         if (address):
             address = address['title']
         if (pricing):
             pricing = pricing.text
+            pricing = re.sub(r"[$,]", "", pricing)
+            pricing = re.split(" - ", pricing)
+            if len(pricing) > 1:
+                price_min = pricing[0]
+                price_max = pricing[1]
+            else:
+                price_min = pricing[0]
+                price_max = price_min
+            price_min = int(price_min)
+            price_max = int(price_max)
         if (title):
             title = title.text
         if (img):
@@ -33,7 +53,7 @@ def listing_parser(raw):
                 img = None
 
         properties.append(
-            {"title": title, "pricing": pricing, 'address': address, 'beds': beds, 'img': img})
+            {'title': title, 'price_min': price_min, 'price_max': price_max, 'address': address, 'bed_min': bed_min, 'bed_max': bed_max, 'img': img})
 
     return properties
 
