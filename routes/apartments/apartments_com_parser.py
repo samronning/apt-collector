@@ -33,16 +33,20 @@ def listing_parser(raw):
             address = address['title']
         if (pricing):
             pricing = pricing.text
-            pricing = re.sub(r"[^\d^-]", "", pricing)
-            pricing = re.split("-", pricing)
-            if len(pricing) > 1:
-                price_min = pricing[0]
-                price_max = pricing[1]
+            if re.search(r"\d", pricing) == None:
+                price_min = None
+                price_max = None
             else:
-                price_min = pricing[0]
-                price_max = price_min
-            price_min = int(price_min)
-            price_max = int(price_max)
+                pricing = re.sub(r"[^\d^-]", "", pricing)
+                pricing = re.split("-", pricing)
+                if len(pricing) > 1:
+                    price_min = pricing[0]
+                    price_max = pricing[1]
+                else:
+                    price_min = pricing[0]
+                    price_max = price_min
+                price_min = int(price_min)
+                price_max = int(price_max)
         if (title):
             title = title.text
         if (img):
