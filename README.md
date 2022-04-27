@@ -1,5 +1,7 @@
 # Welcome to Apartment Collector!
 
+The intent is for this to be used in combination with https://github.com/samronning/aptfinder to create a unified apartment search interface.
+
 This is a utility that scrapes various apartment websites (apartments.com/zillow.com/etc..) to get
 all of the listings and combine them into one place. The current version works for apartments.com
 with plans for future sites.
